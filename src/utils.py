@@ -4,7 +4,7 @@ import requests
 import psycopg2
 
 
-connection = psycopg2.connect(host='localhost', database="Vac_DB", user='postgres', password='Qwerty123')
+connection = psycopg2.connect(host='localhost', database="Vac_DB", user='postgres', password='{j[kjvf228')
 
 
 def get_vacancies(job_title):
@@ -49,7 +49,7 @@ def vacancies_pars(js_obj):
     return all_vacancy
 
 
-def save_csv(user_input):
+def csv_writer(user_input):
     """Сохранение результата запроса в csv файле"""
 
     cols = ['id', 'title', 'salary_from', 'salary_to', 'employer', 'url', 'requirements']
@@ -57,7 +57,7 @@ def save_csv(user_input):
     with open('vacancies.csv', 'w', newline='', encoding='utf-8') as file:
         wr = csv.DictWriter(file, fieldnames=cols)
         wr.writeheader()
-        wr.writerow(get_vacancies(user_input))
+        wr.writerows(get_vacancies(user_input))
 
 
 def create_table():
@@ -101,11 +101,10 @@ def clear_table():
             cursor.execute('TRUNCATE TABLE vacancies')
 
 
-if __name__ == '__main__':
-    user_input = input('Введите название вакансии: \n')
-    save_csv(user_input)
-    create_table()
-    clear_table()
-    add_table_data()
-    connection.close()
-    # pass
+# if __name__ == '__main__':
+#     user_input = input('Введите название вакансии: \n')
+#     csv_writer(user_input)
+#     create_table()
+#     clear_table()
+#     add_table_data()
+#     connection.close()
